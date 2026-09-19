@@ -23,7 +23,7 @@ class AlunoController extends Controller
 
     public function create()
     {
-        return 'Formulário de cadastro';
+        return view('alunos.create');
     }
 
     public function store(Request $request)
