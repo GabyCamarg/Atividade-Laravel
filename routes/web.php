@@ -1,44 +1,20 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AlunoController;
 
-Route::get('/sobre', function () {
-    return 'Página Sobre';
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::get('/alunos', function () {
-    return 'Página de Alunos';
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/contato', function () {
-    return 'Página de Contato';
-});
-
-Route::get('/produto/{id}', function ($id) {
-    return 'Produto: ' . $id;
-});
-
-Route::get('/categoria/{id}', function ($id) {
-    return 'Categoria: ' . $id;
-});
-
-Route::get('/usuario/{id}', function ($id) {
-    return 'Usuário: ' . $id;
-});
-
-Route::get('/alunos-crud', [AlunoController::class, 'index']);
-
-Route::get('/alunos-crud/create', [AlunoController::class, 'create']);
-
-Route::get('/alunos-crud/{id}', [AlunoController::class, 'show']);
-
-Route::post('/alunos-crud', [AlunoController::class, 'store']);
-
-Route::get('/alunos-crud/{id}/edit', [AlunoController::class, 'edit']);
-
-Route::put('/alunos-crud/{id}', [AlunoController::class, 'update']);
-
-Route::delete('/alunos-crud/{id}', [AlunoController::class, 'destroy']);
-
-Route::get('/curso/{id}/alunos', [AlunoController::class, 'alunosDoCurso']);
+require __DIR__.'/auth.php';
