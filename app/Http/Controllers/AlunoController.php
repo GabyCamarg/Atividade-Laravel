@@ -24,11 +24,15 @@ class AlunoController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Aluno::class);
+
         return view('alunos.create');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create', Aluno::class);
+
         $aluno = Aluno::create([
             'nome' => $request->nome,
             'curso' => $request->curso,
@@ -41,12 +45,16 @@ class AlunoController extends Controller
     {
         $aluno = Aluno::find($id);
 
+        $this->authorize('update', $aluno);
+
         return $aluno;
     }
 
     public function update(Request $request, $id)
     {
         $aluno = Aluno::find($id);
+
+        $this->authorize('update', $aluno);
 
         $aluno->update([
             'nome' => $request->nome,
@@ -59,6 +67,8 @@ class AlunoController extends Controller
     public function destroy($id)
     {
         $aluno = Aluno::find($id);
+
+        $this->authorize('delete', $aluno);
 
         $aluno->delete();
 
