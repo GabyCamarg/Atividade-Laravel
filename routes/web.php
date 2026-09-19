@@ -25,4 +25,9 @@ Route::middleware('role:professor')->get('/professor', function () {
     return 'Área exclusiva do professor';
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/alunos-crud', [\App\Http\Controllers\AlunoController::class, 'create']);
+    Route::post('/alunos-crud', [\App\Http\Controllers\AlunoController::class, 'store']);
+});
+
 require __DIR__.'/auth.php';

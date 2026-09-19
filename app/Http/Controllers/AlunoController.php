@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Aluno;
 use App\Models\Curso;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class AlunoController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index()
     {
         $alunos = Aluno::all();
@@ -24,8 +27,6 @@ class AlunoController extends Controller
 
     public function create()
     {
-        $this->authorize('create', Aluno::class);
-
         return view('alunos.create');
     }
 

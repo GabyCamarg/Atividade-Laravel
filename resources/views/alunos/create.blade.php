@@ -2,6 +2,8 @@
 
 @section('conteudo')
 
+@can('create', App\Models\Aluno::class)
+
 <h1>Cadastrar Aluno</h1>
 
 <form action="/alunos-crud" method="POST">
@@ -19,5 +21,7 @@
 
     <button type="submit">Cadastrar</button>
 </form>
+
+@endcan
 
 @endsection
