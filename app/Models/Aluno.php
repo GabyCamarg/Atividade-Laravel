@@ -10,10 +10,16 @@ class Aluno extends Model
         'nome',
         'curso',
         'curso_id',
+        'user_id',
     ];
 
     public function curso()
     {
         return $this->belongsTo(Curso::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
