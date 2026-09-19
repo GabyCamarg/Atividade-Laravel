@@ -17,4 +17,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('role:admin')->get('/admin', function () {
+    return 'Área exclusiva do administrador';
+});
+
+Route::middleware('role:professor')->get('/professor', function () {
+    return 'Área exclusiva do professor';
+});
+
 require __DIR__.'/auth.php';
