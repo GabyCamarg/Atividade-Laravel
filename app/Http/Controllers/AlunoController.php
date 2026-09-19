@@ -40,4 +40,32 @@ class AlunoController extends Controller
     {
         return 'Aluno excluído: ' . $id;
     }
+
+    public function porCurso($curso)
+    {
+        $alunos = \App\Models\Aluno::where('curso', $curso)->get();
+
+        return $alunos;
+    }
+
+    public function porNome($nome)
+    {
+    
+        $alunos = \App\Models\Aluno::where('nome', 'like', '%' . $nome . '%')->get();
+
+        return $alunos;
+    }
+    public function recentes()
+    {
+        $alunos = \App\Models\Aluno::orderBy('created_at', 'desc')->get();
+
+        return $alunos;
+    }
+
+    public function quantidade()
+    {
+    $quantidade = \App\Models\Aluno::count();
+
+    return $quantidade;
+    }
 }
