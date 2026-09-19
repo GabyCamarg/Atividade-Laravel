@@ -40,3 +40,5 @@ Route::get('/alunos-crud/{id}/edit', [AlunoController::class, 'edit']);
 Route::put('/alunos-crud/{id}', [AlunoController::class, 'update']);
 
 Route::delete('/alunos-crud/{id}', [AlunoController::class, 'destroy']);
+
+Route::get('/curso/{id}/alunos', [AlunoController::class, 'alunosDoCurso']);

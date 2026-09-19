@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Aluno;
+use App\Models\Curso;
 
 class AlunoController extends Controller
 {
@@ -90,5 +91,12 @@ class AlunoController extends Controller
         $quantidade = Aluno::count();
 
         return $quantidade;
+    }
+
+    public function alunosDoCurso($id)
+    {
+        $curso = Curso::find($id);
+
+        return view('cursos.alunos', compact('curso'));
     }
 }
