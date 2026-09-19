@@ -13,3 +13,14 @@ Route::get('/alunos', function () {
 Route::get('/contato', function () {
     return 'Página de Contato';
 });
+Route::get('/produto/{id}', function ($id) {
+    return 'Produto: ' . $id;
+});
+
+Route::get('/categoria/{id}', function ($id) {
+    return 'Categoria: ' . $id;
+});
+
+Route::get('/usuario/{id}', function ($id) {
+    return 'Usuário: ' . $id;
+});
