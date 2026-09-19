@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Aluno;
 
 class AlunoController extends Controller
 {
     public function index()
     {
-        return 'Lista de alunos';
+        $alunos = Aluno::all();
+
+        return $alunos;
     }
 
     public function show($id)
     {
-        return 'Aluno: ' . $id;
+        $aluno = Aluno::find($id);
+
+        return $aluno;
     }
 
     public function create()
@@ -23,49 +28,67 @@ class AlunoController extends Controller
 
     public function store(Request $request)
     {
-        return 'Aluno cadastrado';
+        $aluno = Aluno::create([
+            'nome' => $request->nome,
+            'curso' => $request->curso,
+        ]);
+
+        return $aluno;
     }
 
     public function edit($id)
     {
-        return 'Editar aluno: ' . $id;
+        $aluno = Aluno::find($id);
+
+        return $aluno;
     }
 
     public function update(Request $request, $id)
     {
-        return 'Aluno atualizado: ' . $id;
+        $aluno = Aluno::find($id);
+
+        $aluno->update([
+            'nome' => $request->nome,
+            'curso' => $request->curso,
+        ]);
+
+        return $aluno;
     }
 
     public function destroy($id)
     {
-        return 'Aluno excluído: ' . $id;
+        $aluno = Aluno::find($id);
+
+        $aluno->delete();
+
+        return 'Aluno excluído com sucesso';
     }
 
     public function porCurso($curso)
     {
-        $alunos = \App\Models\Aluno::where('curso', $curso)->get();
+        $alunos = Aluno::where('curso', $curso)->get();
 
         return $alunos;
     }
 
     public function porNome($nome)
     {
-    
-        $alunos = \App\Models\Aluno::where('nome', 'like', '%' . $nome . '%')->get();
+        $alunos = Aluno::where('nome', 'like', '%' . $nome . '%')->get();
 
         return $alunos;
     }
+
     public function recentes()
     {
-        $alunos = \App\Models\Aluno::orderBy('created_at', 'desc')->get();
+        $alunos = Aluno::orderBy('created_at', 'desc')->get();
 
         return $alunos;
     }
 
     public function quantidade()
     {
-    $quantidade = \App\Models\Aluno::count();
+        $quantidade = Aluno::count();
 
-    return $quantidade;
+        return $quantidade;
     }
 }
