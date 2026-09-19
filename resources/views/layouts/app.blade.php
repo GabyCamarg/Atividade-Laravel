@@ -5,6 +5,8 @@
 </head>
 <body>
 
+    @include('layouts.menu')
+
     @yield('conteudo')
 
 </body>
